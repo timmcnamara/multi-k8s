@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 class Fib extends Component {
   state = {
     seenIndexes: [],
     values: {},
-    index: ''
+    index: ""
   };
 
   componentDidMount() {
@@ -14,12 +14,12 @@ class Fib extends Component {
   }
 
   async fetchValues() {
-    const values = await axios.get('/api/values/current');
+    const values = await axios.get("/api/values/current");
     this.setState({ values: values.data });
   }
 
   async fetchIndexes() {
-    const seenIndexes = await axios.get('/api/values/all');
+    const seenIndexes = await axios.get("/api/values/all");
     this.setState({
       seenIndexes: seenIndexes.data
     });
@@ -28,14 +28,14 @@ class Fib extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    await axios.post('/api/values', {
+    await axios.post("/api/values", {
       index: this.state.index
     });
-    this.setState({ index: '' });
+    this.setState({ index: "" });
   };
 
   renderSeenIndexes() {
-    return this.state.seenIndexes.map(({ number }) => number).join(', ');
+    return this.state.seenIndexes.map(({ number }) => number).join(", ");
   }
 
   renderValues() {
@@ -64,8 +64,7 @@ class Fib extends Component {
           <button>Submit</button>
         </form>
 
-        <h3>Indexes I have seen:</h3>
-        {this.renderSeenIndexes()}
+        <h3>Indexes I have seen- was causing error...:</h3>
 
         <h3>Calculated Values:</h3>
         {this.renderValues()}
